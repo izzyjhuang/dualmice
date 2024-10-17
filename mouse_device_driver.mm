@@ -13,15 +13,18 @@ static void InputValueCallback(void *context, IOReturn result, void *sender, IOH
 
 void addDriverForDevice(IOHIDDeviceRef device) {
     if (deviceCount >= 10) return;  // Limit to 10 devices for now
-    
+
     // Create a new driver for this device
     MouseDeviceDriver* driver = (MouseDeviceDriver*)malloc(sizeof(MouseDeviceDriver));
     driver->device = device;
-    driver->cursorController.currentX = 100;  // Start each cursor at position 100, 100
-    driver->cursorController.currentY = 100;
 
-    // Initialize the cursor controller for the device
+    // Initialize each cursor independently and position them separately
     initCursorController(&driver->cursorController);
+    driver->cursorController.currentX = 100 + (deviceCount * 50);  // Offset initial position to avoid overlap
+    driver->cursorController.currentY = 100 + (deviceCount * 50);
+
+    // Ensure the cursor window is shown for this device
+    [driver->cursorController.cursorWindow makeKeyAndOrderFront:nil];
 
     // Store the driver in the array
     deviceDrivers[deviceCount++] = driver;

@@ -1,25 +1,15 @@
 // cursor_controller.m
 
 #include "cursor_controller.h"
-#include <Cocoa/Cocoa.h> // Include the Cocoa framework
+#include <Cocoa/Cocoa.h>
+#include <ApplicationServices/ApplicationServices.h>  // For system cursor manipulation
 
 void initCursorController(CursorController *controller) {
-    // Define a frame for the custom cursor
+    // Define a frame for the custom cursor (no need to display it)
     NSRect frame = NSMakeRect(0, 0, 20, 20);  // Adjust size as necessary
-    controller->cursorWindow = [[NSWindow alloc] initWithContentRect:frame
-        styleMask:NSWindowStyleMaskBorderless
-        backing:NSBackingStoreBuffered defer:NO];
 
-    // Make the window transparent and non-interactive
-    [controller->cursorWindow setOpaque:NO];
-    [controller->cursorWindow setBackgroundColor:[NSColor clearColor]];
-    [controller->cursorWindow setIgnoresMouseEvents:YES];
-    [controller->cursorWindow setLevel:NSFloatingWindowLevel];
-
-    // Create a simple view to represent the cursor (you can use a custom cursor image here)
-    NSView *cursorView = [[NSView alloc] initWithFrame:frame];
-    [controller->cursorWindow setContentView:cursorView];
-    [controller->cursorWindow makeKeyAndOrderFront:nil];
+    // Instead of creating a visible window, we skip that step
+    controller->cursorWindow = nil;  // No visual window needed
 }
 
 void moveCursor(CursorController *controller, float x, float y) {
@@ -27,11 +17,11 @@ void moveCursor(CursorController *controller, float x, float y) {
     controller->currentX += x;
     controller->currentY += y;
 
-    // Move the cursor window to the new position
-    NSRect frame = [controller->cursorWindow frame];
-    frame.origin.x = controller->currentX;
-    frame.origin.y = controller->currentY;
-    [controller->cursorWindow setFrameOrigin:frame.origin];
+    // Move the actual system cursor to the new position
+    CGPoint newCursorPosition = CGPointMake(controller->currentX, controller->currentY);
+    CGWarpMouseCursorPosition(newCursorPosition);
+
+    // No need to move a visual window since we’re controlling the system cursor
 }
 
 void performClick(float x, float y) {
