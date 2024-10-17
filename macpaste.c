@@ -1,22 +1,10 @@
-// Public Domain License 2016
-//
-// Simulate right-handed unix/linux X11 middle-mouse-click copy and paste.
-//
-// References:
-// http://stackoverflow.com/questions/3134901/mouse-tracking-daemon
-// http://stackoverflow.com/questions/2379867/simulating-key-press-events-in-mac-os-x#2380280
-//
-// Compile with:
-// gcc -framework ApplicationServices -o macpaste macpaste.c
-//
-// Start with:
-// ./macpaste
-//
-// Terminate with Ctrl+C
+// macpaste.c
 
 #include <ApplicationServices/ApplicationServices.h>
 #include <Carbon/Carbon.h> // kVK_ANSI_*
 #include <sys/time.h> // gettimeofday
+#include "mouse_device_listener.h"
+
 
 char isDragging = 0;
 long long prevClickTime = 0;
@@ -128,6 +116,8 @@ static void paste(CGEventRef event) {
       int argc,
       char ** argv
     ) {
+      MouseDeviceListener listener;
+      startListening(&listener);
       CGEventMask emask;
       CFMachPortRef myEventTap;
       CFRunLoopSourceRef eventTapRLSrc;
