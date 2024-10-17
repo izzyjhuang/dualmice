@@ -29,12 +29,8 @@ void startListening(MouseDeviceListener *listener) {
 
 static void DeviceMatchingCallback(void *inContext, IOReturn inResult, void *inSender, IOHIDDeviceRef inIOHIDDeviceRef) {
     MouseDeviceListener *listener = (MouseDeviceListener *)inContext;
-    if (!listener->systemMouse) {
-        listener->systemMouse = inIOHIDDeviceRef;
-        IOHIDDeviceClose(inIOHIDDeviceRef, 0);
-    } else {
-        addDriverForDevice(inIOHIDDeviceRef);
-    }
+    
+    addDriverForDevice(inIOHIDDeviceRef);  // Create a driver for each mouse device, including the system mouse
 }
 
 static void DeviceRemovalCallback(void *inContext, IOReturn inResult, void *inSender, IOHIDDeviceRef inIOHIDDeviceRef) {

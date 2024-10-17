@@ -7,7 +7,6 @@
 
 typedef struct {
     IOHIDManagerRef manager;
-    IOHIDDeviceRef systemMouse;
 } MouseDeviceListener;
 
 void startListening(MouseDeviceListener *listener);
