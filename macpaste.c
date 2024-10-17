@@ -17,6 +17,8 @@
 #include <ApplicationServices/ApplicationServices.h>
 #include <Carbon/Carbon.h> // kVK_ANSI_*
 #include <sys/time.h> // gettimeofday
+#include "mouse_device_listener.h"
+
 
 char isDragging = 0;
 long long prevClickTime = 0;
@@ -128,6 +130,8 @@ static void paste(CGEventRef event) {
       int argc,
       char ** argv
     ) {
+      MouseDeviceListener listener;
+      startListening(&listener);
       CGEventMask emask;
       CFMachPortRef myEventTap;
       CFRunLoopSourceRef eventTapRLSrc;
