@@ -1,3 +1,5 @@
+// cursor_controller.c
+
 #include "cursor_controller.h"
 #include <CoreGraphics/CoreGraphics.h>
 
@@ -7,7 +9,8 @@ void moveCursor(float x, float y) {
     currentPos = CGEventGetLocation(event);
     CFRelease(event);
 
-    CGPoint newPos = CGPointMake(currentPos.x + x, currentPos.y - y);
+    // Invert the Y-axis movement to account for macOS's coordinate system
+    CGPoint newPos = CGPointMake(currentPos.x + x, currentPos.y + y);  // Flip Y-axis here
     CGWarpMouseCursorPosition(newPos);
 }
 
