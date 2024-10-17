@@ -1,4 +1,4 @@
-// mouse_device_driver.c
+// mouse_device_driver.mm
 
 #include "mouse_device_driver.h"
 #include "cursor_controller.h"
@@ -20,13 +20,20 @@ void addDriverForDevice(IOHIDDeviceRef device) {
     driver->cursorController.currentX = 100;  // Start each cursor at position 100, 100
     driver->cursorController.currentY = 100;
 
+    // Initialize the cursor controller for the device
+    initCursorController(&driver->cursorController);
+
     // Store the driver in the array
     deviceDrivers[deviceCount++] = driver;
 
     // Set up matching criteria for the device
-    CFNumberRef usagePage = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &(int){kHIDPage_GenericDesktop});
-    CFNumberRef usageX = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &(int){kHIDUsage_GD_X});
-    CFNumberRef usageY = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &(int){kHIDUsage_GD_Y});
+    int genericDesktopPage = kHIDPage_GenericDesktop;
+    int usageXValue = kHIDUsage_GD_X;
+    int usageYValue = kHIDUsage_GD_Y;
+
+    CFNumberRef usagePage = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &genericDesktopPage);
+    CFNumberRef usageX = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &usageXValue);
+    CFNumberRef usageY = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &usageYValue);
 
     CFDictionaryRef matchingX = CFDictionaryCreate(kCFAllocatorDefault,
         (const void *[]){ CFSTR(kIOHIDElementUsagePageKey), CFSTR(kIOHIDElementUsageKey) },
