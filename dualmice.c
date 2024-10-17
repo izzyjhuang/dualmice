@@ -1,4 +1,4 @@
-// macpaste.c
+// dualmice.c
 
 #include <ApplicationServices/ApplicationServices.h>
 #include <Carbon/Carbon.h> // kVK_ANSI_*

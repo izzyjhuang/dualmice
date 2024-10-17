@@ -1,11 +1,11 @@
 CC = gcc
 CFLAGS = -framework IOKit -framework CoreFoundation -framework Cocoa
 
-macpaste: macpaste.o mouse_device_listener.o mouse_device_driver.o cursor_controller.o
-	$(CC) -o macpaste macpaste.o mouse_device_listener.o mouse_device_driver.o cursor_controller.o $(CFLAGS)
+dualmice: dualmice.o mouse_device_listener.o mouse_device_driver.o cursor_controller.o
+	$(CC) -o dualmice dualmice.o mouse_device_listener.o mouse_device_driver.o cursor_controller.o $(CFLAGS)
 
-macpaste.o: macpaste.c
-	$(CC) -c macpaste.c $(CFLAGS)
+dualmice.o: dualmice.c
+	$(CC) -c dualmice.c $(CFLAGS)
 
 mouse_device_listener.o: mouse_device_listener.c
 	$(CC) -c mouse_device_listener.c $(CFLAGS)
@@ -17,4 +17,4 @@ cursor_controller.o: cursor_controller.c
 	$(CC) -c cursor_controller.c $(CFLAGS)
 
 clean:
-	rm -f macpaste *.o
+	rm -f dualmice *.o
