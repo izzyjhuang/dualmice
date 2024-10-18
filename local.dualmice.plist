@@ -3,10 +3,10 @@
 <plist version="1.0">
 	<dict>
 		<key>Label</key>
-		<string>local.macpaste</string>
+		<string>local.dualmice</string>
 		<key>ProgramArguments</key>
 		<array>
-			<string>$HOME/bin/macpaste</string>
+			<string>$HOME/bin/dualmice</string>
 			<string>$ARG</string>
 		</array>
 		<key>RunAtLoad</key>
