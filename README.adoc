@@ -9,13 +9,12 @@
 
 1. Clone the repository and navigate to the project directory:
 
-```bash
+   ```bash
    git clone https://github.com/your-repo/dualmice.git
    cd dualmice
 
 2. Run the setup script:
-
-```bash
+   ```bash
    ./setup.sh
 
 This will:
@@ -29,6 +28,6 @@ This will:
 To manually start the program, run:
 
 ```bash
-   ~/bin/dualmice
-
+~/bin/dualmice
+```
 Enjoy the enhanced multi-cursor and copy-paste features!
