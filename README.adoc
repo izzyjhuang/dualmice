@@ -12,11 +12,12 @@
    ```bash
    git clone https://github.com/your-repo/dualmice.git
    cd dualmice
+   ```
 
 2. Run the setup script:
    ```bash
    ./setup.sh
-
+   ```
 This will:
 
 * Compile the program.
