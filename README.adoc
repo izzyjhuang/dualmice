@@ -23,7 +23,7 @@ cd dualmice
 This will:
 
 * Compile the program.
-* Copy the binary to $HOME/bin.
+* Copy the binary to ```$HOME/bin```.
 * Set up the program to run automatically at login.
 
 == Running
