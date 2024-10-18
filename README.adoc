@@ -15,9 +15,11 @@
    ```
 
 2. Run the setup script:
+
    ```bash
    ./setup.sh
    ```
+   
 This will:
 
 * Compile the program.
